@@ -1,0 +1,7 @@
+#!/bin/bash
+wifidowns=0
+wifidowns=$(awk '{i++; recv[i]=$1}; END{print (recv[2]-recv[1])/1000 }' <(cat /proc/net/dev | grep wlp0s20f3 | awk -F' ' '{print $2 " " $10}'; sleep 1; cat /proc/net/dev | grep wlp0s20f3 | awk -F' ' '{print $2 " " $10}') | sed "s/\-//g" | grep -o -E "[0-9]{0,}\.[0-9]{0,1}")
+wifiups=0
+wifiups=$(awk '{i++; trans[i]=$2}; END{print (trans[2]-trans[1])/1000 }' <(cat /proc/net/dev | grep wlp0s20f3 | awk -F' ' '{print $2 " " $10}'; sleep 1; cat /proc/net/dev | grep wlp0s20f3 | awk -F' ' '{print $2 " " $10}') | sed "s/\-//g" | grep -o -E "[0-9]{0,}\.[0-9]{0,1}")  
+
+echo "Down: $(echo "$wifidowns" | sed "s/\./,/g") Kbps Up: $(echo "$wifiups" | sed "s/\./,/g") Kbps"
