@@ -5,4 +5,4 @@ To install it just copy the file to /usr/bin with:
 
 sudo cp updownsped /usr/bin/updownspeed
 
-Now you can execute it in your terminal emulator just typing updownspeed
+Now you can execute it in your terminal emulator just by typing updownspeed
